@@ -7,7 +7,9 @@ import com.siddhesh.project.uber.uberApp.entities.enums.RideStatus;
 import com.siddhesh.project.uber.uberApp.services.RideService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RideServiceImpl implements RideService {
     @Override
     public Ride getRideById(Long rideId) {

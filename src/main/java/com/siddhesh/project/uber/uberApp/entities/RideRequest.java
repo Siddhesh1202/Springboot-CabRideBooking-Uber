@@ -4,15 +4,15 @@ import com.siddhesh.project.uber.uberApp.entities.enums.PaymentMethod;
 import com.siddhesh.project.uber.uberApp.entities.enums.RideRequestStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.geolatte.geom.Point;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.stereotype.Service;
+import org.locationtech.jts.geom.Point;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Service
+@Setter
 public class RideRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class RideRequest {
     private Point pickupLocation;
 
     @Column(columnDefinition = "Geometry(Point, 4326)")
-    private Point dopOffLocation;
+    private Point dropOffLocation;
 
     @CreationTimestamp
     private LocalDateTime requestTime;
@@ -34,4 +34,6 @@ public class RideRequest {
 
     @Enumerated(EnumType.STRING)
     private RideRequestStatus rideRequestStatus;
+
+    private Double fare;
 }

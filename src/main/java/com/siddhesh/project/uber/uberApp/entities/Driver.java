@@ -2,12 +2,12 @@ package com.siddhesh.project.uber.uberApp.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.geo.Point;
-import org.springframework.stereotype.Service;
 
 @Entity
 @Getter
-@Service
+@Setter
 public class Driver {
     @Id
     private Long id;
@@ -16,7 +16,7 @@ public class Driver {
     private User user;
 
     private Double rating;
-
+    private String vehicleId;
     private Boolean available;
     @Column(columnDefinition = "Geometry(Point, 4326)")
     Point currentLocation;

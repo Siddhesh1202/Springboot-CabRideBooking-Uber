@@ -4,9 +4,11 @@ import com.siddhesh.project.uber.uberApp.dto.DriverDto;
 import com.siddhesh.project.uber.uberApp.dto.RideDto;
 import com.siddhesh.project.uber.uberApp.dto.RiderDto;
 import com.siddhesh.project.uber.uberApp.services.DriverService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DriverServiceImpl implements DriverService {
     @Override
     public RideDto cancelRide(Long rideId) {

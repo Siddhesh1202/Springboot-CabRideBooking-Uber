@@ -1,12 +1,15 @@
 package com.siddhesh.project.uber.uberApp.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 @Entity
 @Getter
-@Service
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Rider {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

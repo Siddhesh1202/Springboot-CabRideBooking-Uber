@@ -5,7 +5,7 @@ import com.siddhesh.project.uber.uberApp.entities.Rider;
 import com.siddhesh.project.uber.uberApp.entities.enums.PaymentMethod;
 import com.siddhesh.project.uber.uberApp.entities.enums.RideStatus;
 import jakarta.persistence.*;
-import org.geolatte.geom.Point;
+import org.locationtech.jts.geom.Point;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -33,4 +33,6 @@ public class RideDto {
     private LocalDateTime startedAt;
 
     private LocalDateTime endedAt;
+
+    private String otp;
 }
