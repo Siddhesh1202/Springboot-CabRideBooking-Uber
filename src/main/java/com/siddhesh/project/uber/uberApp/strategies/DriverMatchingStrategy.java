@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface DriverMatchingStrategy {
-    List<Driver> findTenNearestMatchingDrivers(RideRequest rideRequest);
+    List<Driver> findMatchingDriver(RideRequest rideRequest);
 }
