@@ -14,9 +14,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class RideRequest {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(columnDefinition = "Geometry(Point, 4326)")
     private Point pickupLocation;
 
@@ -24,7 +26,7 @@ public class RideRequest {
     private Point dropOffLocation;
 
     @CreationTimestamp
-    private LocalDateTime requestTime;
+    private LocalDateTime requestedTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Rider rider;

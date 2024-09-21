@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rider")
+@RequestMapping("/riders")
 public class RiderController {
     private final RiderService riderService;
     public RiderController(RiderService riderService) {
