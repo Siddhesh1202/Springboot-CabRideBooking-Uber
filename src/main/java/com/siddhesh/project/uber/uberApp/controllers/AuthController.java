@@ -3,7 +3,6 @@ package com.siddhesh.project.uber.uberApp.controllers;
 import com.siddhesh.project.uber.uberApp.dto.SignupDto;
 import com.siddhesh.project.uber.uberApp.dto.UserDto;
 import com.siddhesh.project.uber.uberApp.services.AuthService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

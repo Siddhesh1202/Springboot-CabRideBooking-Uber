@@ -6,7 +6,6 @@ import com.siddhesh.project.uber.uberApp.dto.RideRequestDto;
 import com.siddhesh.project.uber.uberApp.dto.RiderDto;
 import com.siddhesh.project.uber.uberApp.entities.Rider;
 import com.siddhesh.project.uber.uberApp.entities.User;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -3,7 +3,6 @@ package com.siddhesh.project.uber.uberApp.advices;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 
 import java.util.List;
 

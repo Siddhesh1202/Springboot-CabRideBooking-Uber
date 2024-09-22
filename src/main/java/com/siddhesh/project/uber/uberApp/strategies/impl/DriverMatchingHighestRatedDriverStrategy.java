@@ -1,8 +1,6 @@
 package com.siddhesh.project.uber.uberApp.strategies.impl;
 
-import com.siddhesh.project.uber.uberApp.dto.RideRequestDto;
 import com.siddhesh.project.uber.uberApp.entities.Driver;
-import com.siddhesh.project.uber.uberApp.entities.Ride;
 import com.siddhesh.project.uber.uberApp.entities.RideRequest;
 import com.siddhesh.project.uber.uberApp.repositories.DriverRepository;
 import com.siddhesh.project.uber.uberApp.strategies.DriverMatchingStrategy;

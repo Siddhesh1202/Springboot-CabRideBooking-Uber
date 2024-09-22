@@ -1,13 +1,11 @@
 package com.siddhesh.project.uber.uberApp.dto;
 
 
-import com.siddhesh.project.uber.uberApp.entities.Rider;
 import com.siddhesh.project.uber.uberApp.entities.enums.PaymentMethod;
 import com.siddhesh.project.uber.uberApp.entities.enums.RideRequestStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 import java.time.LocalDateTime;
 
