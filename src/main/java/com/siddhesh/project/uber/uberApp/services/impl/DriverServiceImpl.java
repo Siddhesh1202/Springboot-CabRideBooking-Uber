@@ -16,6 +16,9 @@ import com.siddhesh.project.uber.uberApp.services.RideService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.AccessDeniedException;
@@ -32,7 +35,17 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public RideDto cancelRide(Long rideId) {
-        return null;
+        Ride ride = rideService.getRideById(rideId);
+        Driver currentDriver = getCurrentDriver();
+        if(!currentDriver.equals(ride.getDriver())){
+            throw new RuntimeException("Driver is not available");
+        }
+        if(!ride.getRideStatus().equals(RideStatus.CONFIRMED)){
+            throw new RuntimeException("Ride Cannot be cancelled. Invalid Status : " + ride.getRideStatus());
+        }
+        rideService.updateRideStatus(ride, RideStatus.CANCELLED);
+        updateDriverAvailable(currentDriver, true);
+        return modelMapper.map(ride, RideDto.class);
     }
 
     @Override
@@ -46,8 +59,7 @@ public class DriverServiceImpl implements DriverService {
         if(!currentDriver.getAvailable()){
             throw new RuntimeException("Driver is not available");
         }
-        currentDriver.setAvailable(false);
-        Driver savedDriver = driverRepository.save(currentDriver);
+        Driver savedDriver = updateDriverAvailable(currentDriver, false);
         Ride ride = rideService.createNewRide(rideRequest, savedDriver);
         return modelMapper.map(ride, RideDto.class);
     }
@@ -82,16 +94,27 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public DriverDto getMyProfile() {
-        return null;
+        Driver currentDriver = getCurrentDriver();
+        return modelMapper.map(currentDriver, DriverDto.class);
     }
 
     @Override
-    public List<RideDto> getMyAllRides() {
-        return List.of();
+    public Page<RideDto> getMyAllRides(PageRequest pageRequest) {
+        Driver currentDriver = getCurrentDriver();
+        return rideService.getAllRidesOfDriver(currentDriver, pageRequest).map(
+                ride -> modelMapper.map(ride, RideDto.class)
+        );
     }
 
     @Override
     public Driver getCurrentDriver() {
         return driverRepository.findById(2L).orElseThrow(() -> new ResourceNotFoundException("Driver not found"));
     }
+
+    @Override
+    public Driver updateDriverAvailable(Driver driver, boolean available) {
+        driver.setAvailable(available);
+        return driverRepository.save(driver);
+    }
+
 }
