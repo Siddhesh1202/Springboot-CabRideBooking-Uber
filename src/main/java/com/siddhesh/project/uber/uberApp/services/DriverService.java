@@ -19,4 +19,5 @@ public interface DriverService {
     Page<RideDto> getMyAllRides(PageRequest pageRequest);
     Driver getCurrentDriver();
     Driver updateDriverAvailable(Driver driver, boolean available);
+    Driver createNewDriver(Driver driver);
 }
