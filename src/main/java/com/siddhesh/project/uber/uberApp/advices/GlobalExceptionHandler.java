@@ -2,6 +2,7 @@ package com.siddhesh.project.uber.uberApp.advices;
 
 import com.siddhesh.project.uber.uberApp.exceptions.ResourceNotFoundException;
 import com.siddhesh.project.uber.uberApp.exceptions.RuntimeConflictException;
+import io.jsonwebtoken.JwtException;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,8 +44,8 @@ public class GlobalExceptionHandler {
         return buildErrorResponseEntity(apiError);
     }
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ApiResponse<?>> handleJwtException(AuthenticationException exception) {
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<ApiResponse<?>> handleJwtException(JwtException exception) {
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.UNAUTHORIZED)
                 .message(exception.getMessage())
@@ -51,9 +53,8 @@ public class GlobalExceptionHandler {
         return buildErrorResponseEntity(apiError);
     }
 
-
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ApiResponse<?>> handleAccessDeniedException(AuthenticationException exception) {
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ApiResponse<?>> handleAccessDeniedException(AccessDeniedException exception) {
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.FORBIDDEN)
                 .message(exception.getMessage())
