@@ -1,13 +1,9 @@
 package com.siddhesh.project.uber.uberApp.dto;
 
-import com.siddhesh.project.uber.uberApp.entities.Ride;
-import com.siddhesh.project.uber.uberApp.entities.Wallet;
 import com.siddhesh.project.uber.uberApp.entities.enums.TransactionMethod;
 import com.siddhesh.project.uber.uberApp.entities.enums.TransactionType;
-import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 

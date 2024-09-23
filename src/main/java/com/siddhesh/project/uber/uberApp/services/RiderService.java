@@ -9,8 +9,6 @@ import com.siddhesh.project.uber.uberApp.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import java.util.List;
-
 
 public interface RiderService {
     RideDto cancelRide(Long rideId);

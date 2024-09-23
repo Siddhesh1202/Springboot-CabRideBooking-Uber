@@ -1,7 +1,5 @@
 package com.siddhesh.project.uber.uberApp.services.impl;
 
-import com.siddhesh.project.uber.uberApp.dto.RideDto;
-import com.siddhesh.project.uber.uberApp.dto.WalletTransactionDto;
 import com.siddhesh.project.uber.uberApp.entities.Ride;
 import com.siddhesh.project.uber.uberApp.entities.User;
 import com.siddhesh.project.uber.uberApp.entities.Wallet;

@@ -6,7 +6,6 @@ import com.siddhesh.project.uber.uberApp.entities.Rider;
 import com.siddhesh.project.uber.uberApp.entities.enums.PaymentStatus;
 import com.siddhesh.project.uber.uberApp.entities.enums.TransactionMethod;
 import com.siddhesh.project.uber.uberApp.repositories.PaymentRepository;
-import com.siddhesh.project.uber.uberApp.services.PaymentService;
 import com.siddhesh.project.uber.uberApp.services.WalletService;
 import com.siddhesh.project.uber.uberApp.strategies.PaymentStrategy;
 import lombok.RequiredArgsConstructor;

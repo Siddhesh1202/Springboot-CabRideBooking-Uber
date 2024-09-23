@@ -1,8 +1,6 @@
 package com.siddhesh.project.uber.uberApp.dto;
 
-import com.siddhesh.project.uber.uberApp.entities.User;
 import com.siddhesh.project.uber.uberApp.entities.WalletTransaction;
-import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;

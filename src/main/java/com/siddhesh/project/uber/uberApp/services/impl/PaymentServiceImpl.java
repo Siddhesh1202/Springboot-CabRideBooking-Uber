@@ -8,7 +8,6 @@ import com.siddhesh.project.uber.uberApp.repositories.PaymentRepository;
 import com.siddhesh.project.uber.uberApp.services.PaymentService;
 import com.siddhesh.project.uber.uberApp.strategies.PaymentStrategyManager;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service

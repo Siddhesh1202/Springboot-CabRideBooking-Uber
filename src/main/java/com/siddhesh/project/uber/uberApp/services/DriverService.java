@@ -7,8 +7,6 @@ import com.siddhesh.project.uber.uberApp.entities.Driver;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import java.util.List;
-
 public interface DriverService {
     RideDto cancelRide(Long rideId);
     RideDto acceptRide(Long rideRequestId);
@@ -18,6 +16,6 @@ public interface DriverService {
     DriverDto getMyProfile();
     Page<RideDto> getMyAllRides(PageRequest pageRequest);
     Driver getCurrentDriver();
-    Driver updateDriverAvailable(Driver driver, boolean available);
+    Driver updateDriverAvailability(Driver driver, boolean available);
     Driver createNewDriver(Driver driver);
 }

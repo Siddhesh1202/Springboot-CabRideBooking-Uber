@@ -7,11 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/drivers")
 @RequiredArgsConstructor
+@Secured("ROLES_DRIVER")
 public class DriverController {
     private final DriverService driverService;
     @PostMapping("/acceptRide/{rideRequestId}")
@@ -35,7 +37,7 @@ public class DriverController {
     }
 
     @PostMapping("/rateRider")
-    public ResponseEntity<RiderDto>crateDriver(@RequestBody RatingDto ratingDto) {
+    public ResponseEntity<RiderDto>rateDriver(@RequestBody RatingDto ratingDto) {
         return ResponseEntity.ok(driverService.rateRider(ratingDto.getRideId(), ratingDto.getRating()));
     }
 
@@ -49,10 +51,5 @@ public class DriverController {
                                                     @RequestParam(defaultValue = "10") Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(pageOffset, pageSize, Sort.by(Sort.Direction.DESC, "createdTime", "id"));
         return ResponseEntity.ok(driverService.getMyAllRides(pageRequest));
-    }
-
-    @PostMapping("/rateRider/{rideId}/{rating}")
-    public ResponseEntity<RiderDto> rateRider(@PathVariable Long rideId, @PathVariable Integer rating) {
-        return ResponseEntity.ok(driverService.rateRider(rideId, rating));
     }
 }
