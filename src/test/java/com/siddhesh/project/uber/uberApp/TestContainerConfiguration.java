@@ -9,11 +9,13 @@ import org.testcontainers.utility.DockerImageName;
 
 @TestConfiguration
 public class TestContainerConfiguration {
+
     @Bean
     @ServiceConnection
-    PostgreSQLContainer<?> postgreSQLContainer() {
+    PostgreSQLContainer<?> postgresContainer() {
         var image = DockerImageName.parse("postgis/postgis:12-3.0")
                 .asCompatibleSubstituteFor("postgres");
         return new PostgreSQLContainer<>(image);
     }
 }
+
