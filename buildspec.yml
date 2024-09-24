@@ -6,29 +6,21 @@ phases:
       java: corretto21
     commands:
       - echo Installing Maven...
-
   pre_build:
     commands:
       - echo Logging in to Docker hub...
       - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-
   build:
     commands:
-      - echo Building, Testing, and packaging the application...
-      - mvn clean                        # Clean the Maven project
-      - mvn package                      # Package the project
-      - ls -al target/                   # List contents of target to check if .jar is created
-
+      - echo Building, Testing and packaging the application...
+      - mvn package
   post_build:
     commands:
-      - echo Build, Testing, and packaging completed.
-      - ls -al                           # Debugging: check the whole workspace if target directory is not created
-
+      - echo Build, Testing and packaging completed.
 artifacts:
   files:
-    - target/*.jar                      # Include .jar files from target directory
-  discard-paths: yes                    # Discard original paths for simpler artifact storage
-
+    - target/*.jar
+  discard-paths: yes
 cache:
   paths:
-    - '/root/.m2/**/*'                  # Cache Maven dependencies to speed up future builds
+    - '/root/.m2/**/*'
