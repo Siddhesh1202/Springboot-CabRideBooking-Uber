@@ -6,21 +6,28 @@ phases:
       java: corretto17
     commands:
       - echo Installing Maven...
+
   pre_build:
     commands:
       - echo Logging in to Docker hub...
       - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
   build:
     commands:
-      - echo Building, Testing and packaging the application...
-      - mvn package
+      - echo Building, Testing, and packaging the application...
+      - mvn clean                        # Clean the Maven project to ensure no cached builds
+      - mvn package                      # Package the project to generate the JAR
+      - ls -al target/                   # List the contents of the target directory to verify the JAR exists
+
   post_build:
     commands:
-      - echo Build, Testing and packaging completed.
+      - echo Build, Testing, and packaging completed.
+
 artifacts:
   files:
-    - target/*.jar
-  discard-paths: yes
+    - target/*.jar                      # Include all JAR files in the target directory
+  discard-paths: yes                    # Discard original paths for simpler artifact storage
+
 cache:
   paths:
-    - '/postgres/.m2/**/*'
+    - '/root/.m2/**/*'                  # Cache Maven dependencies to speed up subsequent builds
