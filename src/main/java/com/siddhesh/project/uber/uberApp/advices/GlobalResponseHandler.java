@@ -23,7 +23,7 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
                                   ServerHttpRequest request, ServerHttpResponse response) {
 
         // Allowing endpoints for Open APIs, actuator for health checking and monitoring
-        List<String> allowedRoutes = List.of("/v3/api-docs", "/actuator");
+        List<String> allowedRoutes = List.of("api/auth/**", "/actuator/**", "/swagger-ui/**", "/v3/api-docs/**", "/");
 
         boolean isAllowed = allowedRoutes.
                 stream().

@@ -18,25 +18,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
-
-    private static final String[] PUBLIC_ROUTES = {
-            "api/auth/**", "/actuator/**", "/swagger-ui/**", "/v3/api-docs/**"
-    };
+    private static final String[] PUBLIC_ROUTES= {"api/auth/**", "/actuator/**", "/swagger-ui/**", "/v3/api-docs/**", "/"};
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(Authorize ->
-                        Authorize.requestMatchers(PUBLIC_ROUTES).permitAll()
-                                .requestMatchers("/api/admin/**").hasAnyRole("RESTAURANT_OWNER","ADMIN")
-                                .requestMatchers("/api/**").authenticated()
-                                .anyRequest().permitAll()
-                )
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session
+    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+
+        httpSecurity
+                .sessionManagement(sessionConfig -> sessionConfig
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrfConfig -> csrfConfig.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(PUBLIC_ROUTES).permitAll()
+                        .anyRequest().authenticated()
+                )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
+
+        return httpSecurity.build();
     }
 
 }
