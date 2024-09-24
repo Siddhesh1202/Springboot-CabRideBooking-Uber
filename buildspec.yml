@@ -15,19 +15,20 @@ phases:
   build:
     commands:
       - echo Building, Testing, and packaging the application...
-      - mvn clean                        # Clean the Maven project to ensure no cached builds
-      - mvn package                      # Package the project to generate the JAR
-      - ls -al target/                   # List the contents of the target directory to verify the JAR exists
+      - mvn clean                        # Clean the Maven project
+      - mvn package                      # Package the project
+      - ls -al target/                   # List contents of target to check if .jar is created
 
   post_build:
     commands:
       - echo Build, Testing, and packaging completed.
+      - ls -al                           # Debugging: check the whole workspace if target directory is not created
 
 artifacts:
   files:
-    - target/*.jar                      # Include all JAR files in the target directory
+    - target/*.jar                      # Include .jar files from target directory
   discard-paths: yes                    # Discard original paths for simpler artifact storage
 
 cache:
   paths:
-    - '/root/.m2/**/*'                  # Cache Maven dependencies to speed up subsequent builds
+    - '/root/.m2/**/*'                  # Cache Maven dependencies to speed up future builds
