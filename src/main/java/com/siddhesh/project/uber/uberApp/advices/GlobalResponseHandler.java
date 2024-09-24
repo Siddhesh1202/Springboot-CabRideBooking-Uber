@@ -18,15 +18,21 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
         return true;
     }
 
-    @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        List<String> allowedRoutes = List.of("/v3/api-docs", "/actuator");
-        boolean allowed = allowedRoutes.stream().anyMatch(route -> request.getURI().getPath().contains(route));
+    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
+                                  Class<? extends HttpMessageConverter<?>> selectedConverterType,
+                                  ServerHttpRequest request, ServerHttpResponse response) {
 
-        if(body instanceof ApiResponse<?> || allowed) {
+        // Allowing endpoints for Open APIs, actuator for health checking and monitoring
+        List<String> allowedRoutes = List.of("/v3/api-docs", "/actuator");
+
+        boolean isAllowed = allowedRoutes.
+                stream().
+                anyMatch(route ->
+                        request.getURI().getPath().contains(route));
+
+        if (body instanceof ApiResponse<?> || isAllowed) {
             return body;
         }
-
         return new ApiResponse<>(body);
     }
 }
