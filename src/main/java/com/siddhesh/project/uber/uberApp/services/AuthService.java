@@ -1,7 +1,6 @@
 package com.siddhesh.project.uber.uberApp.services;
 
 import com.siddhesh.project.uber.uberApp.dto.DriverDto;
-import com.siddhesh.project.uber.uberApp.dto.OnBoardDriverDto;
 import com.siddhesh.project.uber.uberApp.dto.SignupDto;
 import com.siddhesh.project.uber.uberApp.dto.UserDto;
 
