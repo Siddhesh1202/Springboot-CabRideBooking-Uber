@@ -23,4 +23,4 @@ artifacts:
   discard-paths: yes
 cache:
   paths:
-    - '/root/.m2/**/*'
+    - '/postgres/.m2/**/*'
