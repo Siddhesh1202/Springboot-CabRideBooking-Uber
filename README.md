@@ -28,6 +28,129 @@ This is a monolithic backend application for an Uber-like cab booking system. Th
 The complete API documentation is available at:  
 [Swagger UI](http://uberapp-springboot-env.eba-wkcd9jcr.us-east-1.elasticbeanstalk.com/swagger-ui/index.html)
 
+## Authentication
+
+### AuthController
+
+Handles user authentication and driver onboarding tasks.
+
+#### Endpoints:
+
+- **POST /auth/signup**  
+  Register a new user.
+  - Request Body: `SignupDto`
+  - Response: `UserDto` (201 Created)
+
+- **POST /auth/onBoardNewDriver/{userId}**  
+  Onboard a new driver (admin only).
+  - Path Variable: `userId` (Long)
+  - Request Body: `OnBoardDriverDto`
+  - Response: `DriverDto` (201 Created)
+
+- **POST /auth/login**  
+  Log in a user and return an access token and set refresh token in a cookie.
+  - Request Body: `LoginRequestDto`
+  - Response: `LoginResponseDto` (200 OK)
+
+- **POST /auth/refresh**  
+  Refresh the access token using a refresh token from cookies.
+  - Response: `LoginResponseDto` (200 OK)
+
+---
+
+## Driver Operations
+
+### DriverController
+
+Handles operations for drivers, including ride management and profile access.
+
+#### Endpoints:
+
+- **POST /drivers/acceptRide/{rideRequestId}**  
+  Accept a ride request.
+  - Path Variable: `rideRequestId` (Long)
+  - Response: `RideDto` (200 OK)
+
+- **POST /drivers/startRide/{rideRequestId}**  
+  Start a ride (with OTP validation).
+  - Path Variable: `rideRequestId` (Long)
+  - Request Body: `RideStartDto`
+  - Response: `RideDto` (200 OK)
+
+- **POST /drivers/endRide/{rideRequestId}**  
+  End a ride.
+  - Path Variable: `rideRequestId` (Long)
+  - Response: `RideDto` (200 OK)
+
+- **POST /drivers/cancelRide/{rideId}**  
+  Cancel a ride.
+  - Path Variable: `rideId` (Long)
+  - Response: `RideDto` (200 OK)
+
+- **POST /drivers/rateRider**  
+  Rate a rider after completing a ride.
+  - Request Body: `RatingDto`
+  - Response: `RiderDto` (200 OK)
+
+- **GET /drivers/getMyProfile**  
+  Retrieve driver profile details.
+  - Response: `DriverDto` (200 OK)
+
+- **GET /drivers/getMyRides**  
+  Get all rides handled by the driver.
+  - Query Params: `pageOffset` (default: 0), `pageSize` (default: 10)
+  - Response: `Page<RideDto>` (200 OK)
+
+---
+
+## Rider Operations
+
+### RiderController
+
+Handles operations for riders, including ride requests, profile access, and rating drivers.
+
+#### Endpoints:
+
+- **POST /riders/requestRide**  
+  Request a new ride.
+  - Request Body: `RideRequestDto`
+  - Response: `RideRequestDto` (200 OK)
+
+- **POST /riders/cancelRide/{rideId}**  
+  Cancel a ride.
+  - Path Variable: `rideId` (Long)
+  - Response: `RideDto` (200 OK)
+
+- **POST /riders/rateDriver**  
+  Rate a driver after completing a ride.
+  - Request Body: `RatingDto`
+  - Response: `DriverDto` (200 OK)
+
+- **GET /riders/getMyProfile**  
+  Retrieve rider profile details.
+  - Response: `RiderDto` (200 OK)
+
+- **GET /riders/getMyRides**  
+  Get all rides taken by the rider.
+  - Query Params: `pageOffset` (default: 0), `pageSize` (default: 10)
+  - Response: `Page<RideDto>` (200 OK)
+
+---
+
+## Health Check
+
+### HealthCheckController
+
+Basic health check endpoint to verify the service is running.
+
+#### Endpoints:
+
+- **POST /**  
+  Health check endpoint that returns "OK".
+  - Response: `String` (200 OK)
+
+---
+
 ## Technology Stack
 
 - **Java Spring Boot** - Backend framework for building the RESTful APIs.
